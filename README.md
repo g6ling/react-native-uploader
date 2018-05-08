@@ -128,7 +128,7 @@ doUpload(){
 |---|---|---|---|---|
 |`url`|string|required|URL to upload to|`http://my.server/api/upload`|
 |`method(only iOS)`|string|optional|HTTP method, values: [PUT,POST], default: POST|`POST`|
-|`headers(only iOS)`|object|optional|HTTP headers|`{ 'Accept': 'application/json' }`|
+|`headers`|object|optional|HTTP headers|`{ 'Accept': 'application/json' }`|
 |`params(iOS)`|object|optional|Query parameters|`{ 'user_id': 1  }`|
 |`params(Android)`|object|optional|Query parameters|`{ 'user_id': '1'  }`<br> only support string value. You can't use int, boolean, etc..|
 |`files`|array|required|Array of file objects to upload. See below.| `[{ name: 'file', filename: 'image1.png', filepath: 'assets-library://...', filetype: 'image/png' } ]` |
