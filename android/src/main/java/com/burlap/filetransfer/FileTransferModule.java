@@ -33,6 +33,7 @@ import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.Request.Builder;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -139,8 +140,22 @@ public class FileTransferModule extends ReactContextBaseJavaModule {
           }
         });
       
-        Request request = new Request.Builder()
-                .header("Accept", "application/json")
+        Builder builder = new Request.Builder();
+        if (options.hasKey("headers")) {
+                ReadableMap data = options.getMap("headers");
+                ReadableMapKeySetIterator iterator = data.keySetIterator();
+
+                while(iterator.hasNextKey()) {
+                        String key = iterator.nextKey();
+                        if(ReadableType.String.equals(data.getType(key))) {
+                                builder.addHeader(key, data.getString(key));
+                        }
+                }
+        } else {
+                builder.addHeader("Accept", "application/json");
+        }
+            
+        Request request = builder
                 .url(url)
                 .post(monitoredRequest)
                 .build();
